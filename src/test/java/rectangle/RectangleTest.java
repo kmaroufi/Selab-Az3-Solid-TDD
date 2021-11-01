@@ -22,31 +22,21 @@ public class RectangleTest {
     }
 
     @Test
-    public void testConstructorWithNegativeWidth(){
-        float width = random.nextFloat() * -10f;
+    public void testConstructorWithNonPositiveWidth(){
+        float width = random.nextFloat() * -10f - 0.1f;
         float height = random.nextFloat() * 10f;
+
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(0, height));
     }
 
     @Test
-    public void testConstructorWithNegativeHeight(){
+    public void testConstructorWithNonPositiveHeight(){
         float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * -10f;
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
-    }
+        float height = random.nextFloat() * -10f - 0.1f;
 
-    @Test
-    public void testConstructorWithZeroWidth(){
-        float width = 0f;
-        float height = random.nextFloat() * 10f;
         Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
-    }
-
-    @Test
-    public void testConstructorWithZeroHeight(){
-        float width = random.nextFloat() * 10f;
-        float height = 0f;
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, 0));
     }
 
     @Test
