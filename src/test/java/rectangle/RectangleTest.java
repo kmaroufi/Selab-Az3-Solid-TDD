@@ -77,4 +77,28 @@ public class RectangleTest {
         float newHeight = random.nextFloat() * 10f;
         Assertions.assertDoesNotThrow(() -> rectangle.setHeight(newHeight));
     }
+
+    @Test
+    public void testSetWidthWithNonPositiveValue() {
+        float width = random.nextFloat() * 10f;
+        float height = random.nextFloat() * 10f;
+        Rectangle rectangle = new Rectangle(width, height);
+
+        float newWidth = random.nextFloat() * -10f - 0.1f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setWidth(newWidth));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setWidth(0));
+    }
+
+    @Test
+    public void testSetHeightWithNonPositiveValue() {
+        float width = random.nextFloat() * 10f;
+        float height = random.nextFloat() * 10f;
+        Rectangle rectangle = new Rectangle(width, height);
+
+        float newHeight = random.nextFloat() * -10f - 0.1f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setHeight(newHeight));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setHeight(0));
+    }
 }
