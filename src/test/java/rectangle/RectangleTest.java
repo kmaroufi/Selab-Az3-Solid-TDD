@@ -20,4 +20,13 @@ public class RectangleTest {
         float height = random.nextFloat() * 10f;
         Assertions.assertDoesNotThrow(() -> new Rectangle(width, height));
     }
+
+    @Test
+    public void testComputeArea() {
+        float width = random.nextFloat() * 10f;
+        float height = random.nextFloat() * 10f;
+        Rectangle rectangle = new Rectangle(width, height);
+
+        Assertions.assertEquals(rectangle.computeArea(), width * height);
+    }
 }
