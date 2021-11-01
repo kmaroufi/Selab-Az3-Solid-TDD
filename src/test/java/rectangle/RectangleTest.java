@@ -36,6 +36,20 @@ public class RectangleTest {
     }
 
     @Test
+    public void testConstructorWithZeroWidth(){
+        float width = 0f;
+        float height = random.nextFloat() * 10f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
+    }
+
+    @Test
+    public void testConstructorWithZeroHeight(){
+        float width = random.nextFloat() * 10f;
+        float height = 0f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
+    }
+
+    @Test
     public void testComputeArea() {
         float width = random.nextFloat() * 10f;
         float height = random.nextFloat() * 10f;
