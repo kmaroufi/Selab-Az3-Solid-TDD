@@ -59,23 +59,25 @@ public class RectangleTest {
     }
 
     @Test
-    public void testSetWidth() {
+    public void testSetAndGetWidth() {
         float width = random.nextFloat() * 10f;
         float height = random.nextFloat() * 10f;
         Rectangle rectangle = new Rectangle(width, height);
 
         float newWidth = random.nextFloat() * 10f;
         Assertions.assertDoesNotThrow(() -> rectangle.setWidth(newWidth));
+        Assertions.assertEquals(rectangle.getWidth(), newWidth);
     }
 
     @Test
-    public void testSetHeight() {
+    public void testSetAndGetHeight() {
         float width = random.nextFloat() * 10f;
         float height = random.nextFloat() * 10f;
         Rectangle rectangle = new Rectangle(width, height);
 
         float newHeight = random.nextFloat() * 10f;
         Assertions.assertDoesNotThrow(() -> rectangle.setHeight(newHeight));
+        Assertions.assertEquals(rectangle.getHeight(), newHeight);
     }
 
     @Test
