@@ -22,6 +22,20 @@ public class RectangleTest {
     }
 
     @Test
+    public void testConstructorWithNegativeWidth(){
+        float width = random.nextFloat() * -10f;
+        float height = random.nextFloat() * 10f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
+    }
+
+    @Test
+    public void testConstructorWithNegativeHeight(){
+        float width = random.nextFloat() * 10f;
+        float height = random.nextFloat() * -10f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
+    }
+
+    @Test
     public void testComputeArea() {
         float width = random.nextFloat() * 10f;
         float height = random.nextFloat() * 10f;
