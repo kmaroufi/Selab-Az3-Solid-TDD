@@ -1,96 +1,77 @@
 package rectangle;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.Random;
-
 public class RectangleTest {
-    public Random random;
-
-    @BeforeEach
-    public void before() {
-        random = new Random();
+    @Test
+    public void testConstructor() {
+        Assertions.assertDoesNotThrow(() -> new Rectangle(3, 5));
+        Assertions.assertDoesNotThrow(() -> new Rectangle(10.5f, 4.597f));
+        Assertions.assertDoesNotThrow(() -> new Rectangle(0.1f, 0.7f));
+        Assertions.assertDoesNotThrow(() -> new Rectangle(789000.567f, 657000.123f));
     }
 
     @Test
-    public void testConstructor(){
-        float width = random.nextFloat() * 10;
-        float height = random.nextFloat() * 10f;
-        Assertions.assertDoesNotThrow(() -> new Rectangle(width, height));
-    }
+    public void testConstructorWithIllegalArgument() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(-1, 10));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(-57.6f, 3.5f));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(0, 5.7f));
 
-    @Test
-    public void testConstructorWithNonPositiveWidth(){
-        float width = random.nextFloat() * -10f - 0.1f;
-        float height = random.nextFloat() * 10f;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(5, -4));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(23.3f, -9.9f));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(5.7f, 0));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(0, height));
-    }
-
-    @Test
-    public void testConstructorWithNonPositiveHeight(){
-        float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * -10f - 0.1f;
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, height));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(width, 0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(-10, -8));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(-4.5f, -5.5f));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Rectangle(0, 0));
     }
 
     @Test
     public void testComputeArea() {
-        float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * 10f;
-        Rectangle rectangle = new Rectangle(width, height);
-
-        Assertions.assertEquals(rectangle.computeArea(), width * height);
+        Assertions.assertEquals(new Rectangle(3, 4).computeArea(), 12);
+        Assertions.assertEquals(new Rectangle(10.1f, 7.5f).computeArea(), 75.75f);
     }
 
     @Test
-    public void testSetAndGetWidth() {
-        float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * 10f;
-        Rectangle rectangle = new Rectangle(width, height);
-
-        float newWidth = random.nextFloat() * 10f;
-        Assertions.assertDoesNotThrow(() -> rectangle.setWidth(newWidth));
-        Assertions.assertEquals(rectangle.getWidth(), newWidth);
+    public void testGetWidth() {
+        Assertions.assertEquals(new Rectangle(5.5f, 10.5f).getWidth(), 5.5f);
     }
 
     @Test
-    public void testSetAndGetHeight() {
-        float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * 10f;
-        Rectangle rectangle = new Rectangle(width, height);
+    public void testSetWidth() {
+        Rectangle rectangle = new Rectangle(5.5f, 10.5f);
 
-        float newHeight = random.nextFloat() * 10f;
-        Assertions.assertDoesNotThrow(() -> rectangle.setHeight(newHeight));
-        Assertions.assertEquals(rectangle.getHeight(), newHeight);
+        Assertions.assertDoesNotThrow(() -> rectangle.setWidth(15f));
+        Assertions.assertEquals(rectangle.getWidth(), 15f);
     }
 
     @Test
-    public void testSetWidthWithNonPositiveValue() {
-        float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * 10f;
-        Rectangle rectangle = new Rectangle(width, height);
-
-        float newWidth = random.nextFloat() * -10f - 0.1f;
-        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setWidth(newWidth));
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setWidth(0));
+    public void testSetWidthWithIllegalArgument() {
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                new Rectangle(5.5f, 10.5f).setWidth(-10.5f));
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                new Rectangle(5.5f, 10.5f).setWidth(0));
     }
 
     @Test
-    public void testSetHeightWithNonPositiveValue() {
-        float width = random.nextFloat() * 10f;
-        float height = random.nextFloat() * 10f;
-        Rectangle rectangle = new Rectangle(width, height);
+    public void testGetHeight(){
+        Assertions.assertEquals(new Rectangle(20.5f, 33.1f).getHeight(), 33.1f);
+    }
 
-        float newHeight = random.nextFloat() * -10f - 0.1f;
-        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setHeight(newHeight));
+    @Test
+    public void testSetHeight() {
+        Rectangle rectangle = new Rectangle(20.5f, 33.1f);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> rectangle.setHeight(0));
+        Assertions.assertDoesNotThrow(() -> rectangle.setHeight(57.7f));
+        Assertions.assertEquals(rectangle.getHeight(), 57.7f);
+    }
+
+    @Test
+    public void testSetHeightWithIllegalArgument() {
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                new Rectangle(5.5f, 10.5f).setHeight(-15.5f));
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                new Rectangle(5.5f, 10.5f).setHeight(0));
     }
 }
