@@ -1,6 +1,6 @@
-package rectangle;
+package Shapes;
 
-public class Rectangle {
+public class Rectangle extends Shape {
     private float width;
     private float height;
 
@@ -11,8 +11,9 @@ public class Rectangle {
         this.height = height;
     }
 
-    public float computeArea() {
-        return width * height;
+    @Override
+    public float computeArea(){
+        return height * width;
     }
 
     public void setWidth(float width) {
